@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Главная
+{% endblock %}
+
+{% block body %}
+    {% for file in page_obj %}
+        <div class="container border border-success my-5 py-4 form-control">
+            <h1 class="mx-5">{{ file.title }}</h1>
+            <small><p class="mx-5 text-primary">загружено пользователем <i>{{ file.user.name }}</i></p></small>
+            <p class="mx-5">{{ file.description }}</p>
+            <p class="mx-5">Категория: {% if file.category %}{{ file.category.name }}{% else %}Не указана{% endif %}</p>
+            <div class="mx-5 file-info">
+                <!-- Отображаем иконку файла -->
+                <i class="{{ file.get_icon_class }}"></i>
+                <!-- Показываем название и формат файла -->
+                <a class="btn btn-outline-success btn-sm" href="{{ file.file_field.url }}" target="_blank">{{ file.file_field.name }}</a>
+                <a class="btn btn-outline-success btn-sm" href="{{ file.file_field.url }}" download>Скачать</a>
+            </div>
+        </div>
+    {% endfor %}
+
+    <!-- Элементы управления пагинацией -->
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a class="page-link" href="?page=1">&laquo; первая</a>
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">предыдущая</a>
+        {% endif %}
+
+        <span class="current-page">Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.</span>
+
+        {% if page_obj.has_next %}
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">следующая</a>
+            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">последняя &raquo;</a>
+        {% endif %}
+    </div>
+
+{% endblock %}

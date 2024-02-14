@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Создать учетную запись
+{% endblock %}
+
+{% block body %}
+    <div class="container w-25 my-5">
+        <h2 class="my-5">Создайте свою учетную запись</h2>
+        <hr>
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
+            </div>
+            {% endfor %}
+        {% endif %}
+        <form action="{% url 'signup' %}" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <input type="text" class="form-control" name="name" id="exampleFormControlInput1" placeholder="Имя" required>
+            </div>
+            <div class="mb-3">
+                <input type="email" class="form-control" name="email" id="exampleFormControlInput1" placeholder="Электронная почта" required>
+            </div>
+            <div class="mb-3">
+                <input type="password" class="form-control" name="pwd" id="exampleFormControlInput1" placeholder="Пароль" required>
+            </div>
+            <div class="mb-3">
+                <select class="form-select" name="gender" aria-label="Выберите пол" required>
+                    <option value="1">Мужской</option>
+                    <option value="2">Женский</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <input type="submit" class="btn btn-danger w-100" value="Зарегистрироваться">
+            </div>
+        </form>
+        <center>
+            Уже есть учетная запись? <a href="{% url 'login' %}" class="text-light">Войти</a>
+        </center>
+    </div>
+{% endblock %}

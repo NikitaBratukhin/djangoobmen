@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Загрузка файла
+{% endblock %}
+
+{% block body %}
+
+    <div class="container w-50">
+        <h2 class="my-3">Загрузить файл</h2>
+        <hr>
+        <form class="form-control" action="{% url 'file_upload' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                        {{message}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <input type="text" name="title" placeholder="Название" class="form-control my-3">
+            <textarea placeholder="Описание" name="description" class="form-control my-3"></textarea>
+
+            <!-- Добавление выпадающего списка для выбора категории -->
+            <select name="category" class="form-control my-3">
+                <option value="">Выберите категорию</option>
+                {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endfor %}
+            </select>
+
+            <input type="file" class="form-control my-3" name="file_to_upload">
+            <input type="submit" value="Загрузить" class="btn btn-outline-primary my-3">
+        </form>
+    </div>
+
+{% endblock %}

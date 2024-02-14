@@ -1,0 +1,86 @@
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    height: 100vh;
+    color: #ffffff;
+}
+
+.container {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.8);
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 800px;
+}
+
+.container:hover {
+    transform: translateY(-5px);
+}
+
+a.btn {
+    text-decoration: none;
+    color: #007bff;
+    padding: 10px 15px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a.btn:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Новые стили для пагинации */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+    margin: 20px auto;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: fit-content;
+}
+
+.step-links {
+    display: flex;
+    gap: 10px;
+}
+
+.step-links a, .current-page {
+    color: #fff;
+    background-color: #007bff;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.step-links a:hover {
+    transform: scale(1.1);
+}
+
+.current-page {
+    font-weight: bold;
+    background-color: #023047;
+}

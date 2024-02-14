@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Настройки
+{% endblock %}
+
+{% block body %}
+
+    <div class="container form-control my-4">
+        <h3>Добро пожаловать! {{request.session.user}}</h3>
+    </div>
+
+    <div class="container">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="card w-50 py-3 px-4">
+                            <h4 class="card-text">Видео: {{videos}}</h4>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="card w-50 py-3 px-4">
+                            <h4 class="card-text">Аудио: {{audios}}</h4>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="card w-50 py-3 px-4">
+                            <h4 class="card-text">Изображения: {{images}}</h4>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="card w-50 py-3 px-4">
+                            <h4 class="card-text">PDF: {{pdf}}</h4>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<div class="container form-control">
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button class="nav-link" id="nav-images-tab" data-bs-toggle="tab" data-bs-target="#nav-images" type="button" role="tab" aria-controls="nav-images" aria-selected="true">Изображения</button>
+            <button class="nav-link" id="nav-audios-tab" data-bs-toggle="tab" data-bs-target="#nav-audios" type="button" role="tab" aria-controls="nav-audios" aria-selected="false">Аудио</button>
+            <button class="nav-link" id="nav-videos-tab" data-bs-toggle="tab" data-bs-target="#nav-videos" type="button" role="tab" aria-controls="nav-videos" aria-selected="false">Видео</button>
+            <button class="nav-link" id="nav-pdfs-tab" data-bs-toggle="tab" data-bs-target="#nav-pdfs" type="button" role="tab" aria-controls="nav-pdfs" aria-selected="false">PDF</button>
+        </div>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-images" role="tabpanel" aria-labelledby="nav-images-tab" tabindex="0">
+                {% if img_list %}
+                    {% for img in img_list%}
+                        <div class="container my-3">
+                            <h3>{{img.title}}</h3>
+                            <p>{{img.description}}</p>
+                            <a class="btn btn-outline-success btn-sm" href="../media/{{img.file_field}}/" target="_blank">Просмотр</a>
+                            <a class="btn btn-outline-success btn-sm" href="../media/{{img.file_field}}/" download>Скачать</a>
+                            <a href="{% url 'delete_file' img.id %}" class="btn btn-outline-danger btn-sm">Удалить</a>
+                        </div>
+                        <hr>
+                    {% endfor %}
+                {% else %}
+                    Нет изображений
+                {% endif %}
+            </div>
+            <div class="tab-pane fade" id="nav-audios" role="tabpanel" aria-labelledby="nav-audios-tab" tabindex="0">
+                {% if audio_list %}
+                    {% for aud in audio_list %}
+                        <div class="container my-3">
+                            <h3>{{aud.title}}</h3>
+                            <p>{{aud.description}}</p>
+                            <a class="btn btn-outline-success btn-sm" href="../media/{{aud.file_field}}/" target="_blank">Просмотр</a>
+                            <a class="btn btn-outline-success btn-sm" href="../media/{{aud.file_field}}/" download>Скачать</a>
+                            <a href="{% url 'delete_file' aud.id %}" class="btn btn-outline-danger btn-sm">Удалить</a>
+                        </div>
+                        <hr>
+                    {% endfor %}
+                {% else %}
+                    Нет аудио
+                {% endif %}
+            </div>
+            <div class="tab-pane fade" id="nav-videos" role="tabpanel" aria-labelledby="nav-videos-tab" tabindex="0">
+                {% if videos_list %}
+                    {% for vid in videos_list %}
+                        <div class="container my-3">
+                            <h3>{{vid.title}}</h3>
+                            <p>{{vid.description}}</p>
+                            <a class="btn btn-outline-success btn-sm" href="../media/{{vid.file_field}}/" target="_blank">Просмотр</a>
+                            <a class="btn btn-outline-success btn-sm" href="../media/{{vid.file_field}}/" download>Скачать</a>
+                            <a href="{% url 'delete_file' vid.id %}" class="btn btn-outline-danger btn-sm">Удалить</a>
+                        </div>
+                        <hr>
+                    {% endfor %}
+                {% else %}
+                    Нет видео
+                {% endif %}
+            </div>
+            <div class="tab-pane fade" id="nav-pdfs" role="tabpanel" aria-labelledby="nav-pdfs-tab" tabindex="0">
+                {% if pdfs_list %}
+                    {% for pdf in pdfs_list %}
+                        <div class="container my-3">
+                            <h3>{{pdf.title}}</h3>
+                            <p>{{pdf.description}}</p>
+                            <a class="btn btn-outline-success btn-sm" href="../media/{{pdf.file_field}}/" target="_blank">Просмотр</a>
+                            <a class="btn btn-outline-success btn-sm" href="../media/{{pdf.file_field}}/" download>Скачать</a>
+                            <a href="{% url 'delete_file' pdf.id %}" class="btn btn-outline-danger btn-sm">Удалить</a>
+                        </div>
+                        <hr>
+                    {% endfor %}
+                {% else %}
+                    Нет PDF
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+</div>
+
+{% endblock %}
